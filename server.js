@@ -1,34 +1,20 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const fs = require("fs");
-const https = require("https");
-const usuariosController = require("./usuario"); // Importar controlador de usuarios
+// server.js
+const express = require("express");  // Importar Express para crear el servidor web
+const bodyParser = require("body-parser");  // Importar body-parser para manejar los cuerpos de las solicitudes (JSON)
+const usuariosController = require("./controllers/usuario");  // Importar el controlador de usuarios
+const verificarToken = require('./middleware/auth');  // Importar middleware de autenticación para verificar los tokens
+const routes = require('./routes');  // Importar las rutas definidas en routes.js
 
-const app = express();
-const port = 3000; // Puerto HTTP
-const httpsPort = 3443; // Puerto HTTPS
+const app = express();  // Crear una instancia de la aplicación Express
+const port = 3000;  // Definir el puerto en el que el servidor escuchará
 
-app.use(bodyParser.json());
+app.use(bodyParser.json());  // Configurar body-parser para que procese las solicitudes con contenido JSON
 
-// Rutas de la API para usuarios
-app.post("/createUsuario", usuariosController.crearUsuario);
-app.get("/usuarios", usuariosController.obtenerUsuarios);
-app.get("/getUsuario/:id", usuariosController.obtenerUsuarioPorId);
-app.put("/upUsuario/:id", usuariosController.actualizarUsuario);
-app.delete("/deleteUsuario/:id", usuariosController.eliminarUsuario);
+// Usar las rutas definidas en routes.js y asociarlas al prefijo /api
+app.use('/api', routes);  // Todas las rutas en 'routes.js' estarán disponibles con el prefijo '/api'
 
-// Cargar los certificados SSL/TLS
-const httpsOptions = {
-  key: fs.readFileSync("key.pem"), // Clave privada
-  cert: fs.readFileSync("cert.pem"), // Certificado
-};
-
-// Iniciar servidor HTTP (opcional, para redirigir a HTTPS)
+// Iniciar el servidor HTTP en el puerto 3000
+// Descripción: Arranca el servidor web que escucha solicitudes en http://localhost:3000
 app.listen(port, () => {
-  console.log(`Servidor HTTP escuchando en http://localhost:${port}`);
-});
-
-// Iniciar servidor HTTPS
-https.createServer(httpsOptions, app).listen(httpsPort, () => {
-  console.log(`Servidor HTTPS escuchando en https://localhost:${httpsPort}`);
+  console.log(`Servidor HTTP escuchando en http://localhost:${port}`);  // Mostrar mensaje cuando el servidor esté corriendo
 });
