@@ -23,10 +23,10 @@ router.get('/token', (_req, res) => {
 
 // Definir rutas de la API que requieren autenticación
 // Las siguientes rutas están protegidas por el middleware 'verificarToken', que valida el JWT antes de procesar las solicitudes
-router.post("/createUsuario", usuariosController.crearUsuario);  // Crear un nuevo usuario
-router.get("/usuarios", verificarToken, usuariosController.obtenerUsuarios);  // Obtener todos los usuarios (requiere token)
-router.get("/getUsuario/:id", verificarToken, usuariosController.obtenerUsuarioPorId);  // Obtener un usuario por ID (requiere token)
-router.put("/upUsuario/:id", verificarToken, usuariosController.actualizarUsuario);  // Actualizar un usuario (requiere token)
-router.delete("/deleteUsuario/:id", verificarToken, usuariosController.eliminarUsuario);  // Eliminar un usuario (requiere token)
+router.post("/createUser", usuariosController.crearUsuario);  // Crear un nuevo usuario
+router.get("/getAllUsers", verificarToken, usuariosController.obtenerUsuarios);  // Obtener todos los usuarios (requiere token)
+router.get("/getUser/:id", verificarToken, usuariosController.obtenerUsuarioPorId);  // Obtener un usuario por ID (requiere token)
+router.put("/upUser/:id", verificarToken, usuariosController.actualizarUsuario);  // Actualizar un usuario (requiere token)
+router.delete("/deleteUser/:id", verificarToken, usuariosController.eliminarUsuario);  // Eliminar un usuario (requiere token)
 
 module.exports = router;  // Exportar el router para usarlo en el servidor
