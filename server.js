@@ -1,8 +1,7 @@
 // server.js
 const express = require("express");  // Importar Express para crear el servidor web
 const bodyParser = require("body-parser");  // Importar body-parser para manejar los cuerpos de las solicitudes (JSON)
-const usuariosController = require("./controllers/usuario");  // Importar el controlador de usuarios
-const verificarToken = require('./middleware/auth');  // Importar middleware de autenticación para verificar los tokens
+
 const routes = require('./routes');  // Importar las rutas definidas en routes.js
 
 const app = express();  // Crear una instancia de la aplicación Express
