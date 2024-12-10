@@ -43,7 +43,7 @@ const crearUsuario = async (req, res) => {
 // Función: Obtener todos los usuarios
 // Descripción: Obtiene la lista completa de usuarios desde la base de datos usando un procedimiento almacenado.
 // Recibe: Ningún dato, solo una solicitud GET.
-// Regresa: Un objeto JSON con los datos de todos los usuarios obtenidos de la base de datos.
+// Regresa: Un objeto JSON con los datos de todos los usuarios obtenidos de la base de datos
 const obtenerUsuarios = async (req, res) => {
   // Consulta para llamar a la función almacenada
   const query = "SELECT * FROM public.get_all_users()";
