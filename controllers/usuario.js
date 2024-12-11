@@ -83,7 +83,10 @@ const obtenerUsuarioPorId = async (req, res) => {
     res.status(200).json(rows[0]);
   } catch (err) {
     // Manejo de errores en la consulta
-    res.status(500).json({ error: err.message });
+    if (err.code === '42601') { // Código de error de sintaxis en PostgreSQL
+      return res.status(500).json({ message: "Error de sintaxis" });
+    }
+    return res.status(404).json({ message: "Usuario no encontrado" });
   }
 };
 
